@@ -124,7 +124,7 @@ void contar_id_assuntos_unicos(Processo p[], int n) {
             }
         }
     }
-    printf("Total de id_assuntos únicos: %d\n", total);
+    printf("Total de id_assuntos unicos: %d\n", total);
 }
 
 void listar_processos_multiplos_assuntos(Processo p[], int n) {
@@ -150,9 +150,9 @@ void dias_em_tramitacao(Processo p[], int n) {
 
             time_t t_ajuiza = mktime(&ajuiza);
             double dias = difftime(agora, t_ajuiza) / (60 * 60 * 24);
-            printf("ID: %s - Dias em tramitação: %.0f\n", p[i].id, dias);
+            printf("ID: %s - Dias em tramitacao: %.0f\n", p[i].id, dias);
         } else {
-            printf("Data inválida no processo ID: %s\n", p[i].id);
+            printf("Data invalida no processo ID: %s\n", p[i].id);
         }
     }
 }
