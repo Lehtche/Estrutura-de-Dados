@@ -1,4 +1,3 @@
-// processo.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,20 +9,24 @@ int carregar_processos(const char *nome_arquivo, Processo processos[]) {
     if (!fp) return -1;
 
     char linha[1024];
-    fgets(linha, sizeof(linha), fp); // cabeçalho
+    fgets(linha, sizeof(linha), fp); // Ignora cabeçalho
 
     int i = 0;
     while (fgets(linha, sizeof(linha), fp) && i < MAX_PROCESSOS) {
         char *token = strtok(linha, ",");
+        if (!token) continue;
         strcpy(processos[i].id, token);
 
         token = strtok(NULL, ",");
+        if (!token) continue;
         strcpy(processos[i].data_ajuizamento, token);
 
         token = strtok(NULL, ",");
+        if (!token) continue;
         strcpy(processos[i].id_classe, token);
 
         token = strtok(NULL, "\n");
+        if (!token) continue;
         strcpy(processos[i].id_assunto, token);
 
         separar_assuntos(&processos[i]);
@@ -38,12 +41,14 @@ void separar_assuntos(Processo *proc) {
     proc->total_assuntos = 0;
     char buffer[200];
     strcpy(buffer, proc->id_assunto);
+
     char *start = strchr(buffer, '{');
     char *end = strchr(buffer, '}');
     if (!start || !end || start > end) return;
 
     *end = '\0';
     start++;
+
     char *token = strtok(start, "|");
     while (token != NULL && proc->total_assuntos < MAX_ASSUNTOS) {
         strcpy(proc->assuntos[proc->total_assuntos], token);
@@ -62,7 +67,13 @@ void ordenar_por_id(Processo p[], int n, const char *saida_csv) {
             }
         }
     }
+
     FILE *fp = fopen(saida_csv, "w");
+    if (!fp) {
+        printf("Erro ao criar o arquivo: %s\n", saida_csv);
+        return;
+    }
+
     fprintf(fp, "id,data_ajuizamento,id_classe,id_assunto\n");
     for (int i = 0; i < n; i++) {
         fprintf(fp, "%s,%s,%s,%s\n", p[i].id, p[i].data_ajuizamento, p[i].id_classe, p[i].id_assunto);
@@ -80,7 +91,13 @@ void ordenar_por_data(Processo p[], int n, const char *saida_csv) {
             }
         }
     }
+
     FILE *fp = fopen(saida_csv, "w");
+    if (!fp) {
+        printf("Erro ao criar o arquivo: %s\n", saida_csv);
+        return;
+    }
+
     fprintf(fp, "id,data_ajuizamento,id_classe,id_assunto\n");
     for (int i = 0; i < n; i++) {
         fprintf(fp, "%s,%s,%s,%s\n", p[i].id, p[i].data_ajuizamento, p[i].id_classe, p[i].id_assunto);
@@ -110,6 +127,7 @@ void contar_por_classe(Processo p[], int n) {
 void contar_id_assuntos_unicos(Processo p[], int n) {
     char unicos[MAX_PROCESSOS * MAX_ASSUNTOS][50];
     int total = 0;
+
     for (int i = 0; i < n; i++) {
         for (int a = 0; a < p[i].total_assuntos; a++) {
             int encontrado = 0;
@@ -125,6 +143,7 @@ void contar_id_assuntos_unicos(Processo p[], int n) {
             }
         }
     }
+
     printf("Total de id_assuntos únicos: %d\n", total);
 }
 
@@ -155,11 +174,5 @@ void dias_em_tramitacao(Processo p[], int n) {
         } else {
             printf("Data inválida no processo ID: %s\n", p[i].id);
         }
-    }
-}
-
-void imprimir_processos(Processo p[], int n) {
-    for (int i = 0; i < n; i++) {
-        printf("%s | %s | %s | %s\n", p[i].id, p[i].data_ajuizamento, p[i].id_classe, p[i].id_assunto);
     }
 }
