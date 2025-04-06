@@ -1,41 +1,39 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "processo.h"
 
 int main() {
-    Processo processos[1000]; // Array para armazenar até 1000 processos
-    int qtd_processos = 0;
+    Processo processos[MAX_PROCESSOS];
+    int total = carregar_processos("processo_043_202409032338.csv", processos);
 
-   
-    carregarDados(processos, &qtd_processos); //arquivo csv
-
-    // Ordena os processos pelo id em ordem crescente
-    ordenarPorId(processos, qtd_processos);
-    printf("Processos ordenados por ID:\n");
-    for (int i = 0; i < qtd_processos; i++) {
-        printf("%d - %s\n", processos[i].id, processos[i].numero);
+    if (total == -1) {
+        printf("Erro ao carregar o arquivo.\n");
+        return 1;
     }
 
-    // Ordena os processos pela data de ajuizamento em ordem decrescente
-    ordenarPorData(processos, qtd_processos);
-    printf("\nProcessos ordenados por data de ajuizamento:\n");
-    for (int i = 0; i < qtd_processos; i++) {
-        printf("%d - %s\n", processos[i].id, processos[i].data_ajuizamento);
-    }
+    printf("\n Ordenando por ID de forma crescente \n");
+    ordenar_por_id(processos, total, "ordenado_por_id.csv");
 
-    // Conta quantos processos estão vinculados a uma classe específica
-    int id_classe = 12554; // Exemplo de id_classe
-    int count_classe = contarPorClasse(processos, qtd_processos, id_classe);
-    printf("\nNúmero de processos com id_classe %d: %d\n", id_classe, count_classe);
+    printf("\n Ordenando por data_ajuizamento de forma decrescente\n");
+    ordenar_por_data(processos, total, "ordenado_por_data.csv");
 
-    // Identifica os assuntos únicos nos processos
-    identificarAssuntos(processos, qtd_processos);
+    printf("\n Contagem por id_classe \n");
+    contar_por_classe(processos, total);
 
-    // Lista os processos que têm múltiplos assuntos
-    listarProcessMultiAssuntos(processos, qtd_processos);
+    printf("\n Total de id_assuntos distintos \n");
+    contar_id_assuntos_unicos(processos, total);
 
-    // Calcula a tramitação de um processo em dias
-    int tramitacao = calcularTramitacao(processos[0]);
-    printf("Processo %d esta em tramitação há %d dias.\n", processos[0].id, tramitacao);
+    printf("\n Processos com mais de um assunto \n");
+    listar_processos_multiplos_assuntos(processos, total);
+
+    printf("\n Dias em tramitação \n");
+    dias_em_tramitacao(processos, total);
 
     return 0;
 }
+
+//gcc main.c processo.c -o programa.exe
+//.\programa.exe
+
+//.\output\main.exe
+
