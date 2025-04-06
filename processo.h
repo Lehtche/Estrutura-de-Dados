@@ -1,30 +1,29 @@
 #ifndef PROCESSO_H
 #define PROCESSO_H
 
+#define MAX_PROCESSOS 1000
+#define MAX_ASSUNTOS 20
+
 typedef struct {
-    int id; // Identificador do processo
-    char numero[30]; // Número do processo
-    char data_ajuizamento[20]; 
-    int id_classe; // Classe do processo
-    int id_assunto[10]; 
-    int qtd_assuntos; 
-    int ano_eleicao; 
+    char id[20];
+    char data_ajuizamento[20];
+    char id_classe[50];
+    char id_assunto[200];
+    char assuntos[MAX_ASSUNTOS][50];
+    int total_assuntos;
 } Processo;
 
-// Funções 
-void carregarDados(Processo processos[], int *qtd); // Carrega os dados do arquivo CSV para a estrutura Processo
+// Funções principais
+int carregar_processos(const char *nome_arquivo, Processo processos[]);
+void ordenar_por_id(Processo p[], int n, const char *saida_csv);
+void ordenar_por_data(Processo p[], int n, const char *saida_csv);
+void contar_por_classe(Processo p[], int n);
+void contar_id_assuntos_unicos(Processo p[], int n);
+void listar_processos_multiplos_assuntos(Processo p[], int n);
+void dias_em_tramitacao(Processo p[], int n);
 
-void ordenarPorId(Processo processos[], int qtd); // Ordena os processos pelo id em ordem crescente
+// Função auxiliar
+void separar_assuntos(Processo *proc);
+void imprimir_processos(Processo p[], int n);
 
-void ordenarPorData(Processo processos[], int qtd); // Ordena os processos pela data de ajuizamento em ordem decrescente
-
-int contarPorClasse(Processo processos[], int qtd, int id_classe); 
-
-void identificarAssuntos(Processo processos[], int qtd); 
-
-void lislistarProcessMultiAssuntos(Processo processos[], int qtd); 
-
-int calcularTramitacao(Processo processo); // Calcula o número de dias que um processo está em tramitação
-
-#endif /* se PROCESSO_H não foi definida anteriormente, o
-código entre #ifndef e #endif será processado. Se não, ele será ignorado.*/
+#endif
