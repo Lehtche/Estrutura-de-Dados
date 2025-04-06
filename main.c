@@ -21,7 +21,7 @@ int main() {
         printf("1. Ordem crescente por id\n");
         printf("2. Ordem decrescente por data de ajuizamento\n");
         printf("3. Quantidade de processos por id_classe\n");
-        printf("4. Quantidade total de id_assuntos únicos\n");
+        printf("4. Quantidade total de id_assuntos unicos\n");
         printf("5. Listar processos com mais de um assunto\n");
         printf("6. Quantidade de dias de tramitação de um processo\n");
         printf("7. Sair\n");
@@ -54,7 +54,7 @@ int main() {
                 printf("Saindo...\n");
                 break;
             default:
-                printf("Opção inválida.\n");
+                printf("Opcao invalida.\n");
         }
 
     } while (opcao != 7);
