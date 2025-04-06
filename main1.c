@@ -18,9 +18,9 @@ int main() {
         printf("1. Ordem crescente por id\n");
         printf("2. Ordem decrescente por data de ajuizamento\n");
         printf("3. Quantidade de processos por id_classe\n");
-        printf("4. Quantidade total de id_assuntos únicos\n");
+        printf("4. Quantidade total de id_assuntos unicos\n");
         printf("5. Listar processos com mais de um assunto\n");
-        printf("6. Quantidade de dias de tramitação de um processo \n");
+        printf("6. Quantidade de dias de tramitacao de um processo \n");
         printf("7. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
@@ -44,7 +44,7 @@ int main() {
                 break;
 
             case 4:
-                printf("\n--- Quantidade total de id_assuntos únicos ---\n");
+                printf("\n--- Quantidade total de id_assuntos unicos ---\n");
                 contar_id_assuntos_unicos(processos, total);
                 break;
 
@@ -53,7 +53,7 @@ int main() {
                 listar_processos_multiplos_assuntos(processos, total);
                 break;
             case 6:
-                printf("\n--- Quantidade de dias de tramitação de um processo ---\n");
+                printf("\n--- Quantidade de dias de tramitacao de um processo ---\n");
                 //função
                 break;
 
