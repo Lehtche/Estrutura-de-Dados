@@ -129,11 +129,14 @@ void contar_id_assuntos_unicos(Processo p[], int n) {
 }
 
 void listar_processos_multiplos_assuntos(Processo p[], int n) {
+    int contador = 0;
     for (int i = 0; i < n; i++) {
         if (p[i].total_assuntos > 1) {
             printf("ID: %s - Assuntos: %s\n", p[i].id, p[i].id_assunto);
+            contador++;
         }
     }
+    printf("Total de processos com mais de um assunto: %d\n", contador);
 }
 
 void dias_em_tramitacao(Processo p[], int n) {
