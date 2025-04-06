@@ -11,29 +11,43 @@ int main() {
         return 1;
     }
 
-    printf("\n Ordenando por ID de forma crescente \n");
-    ordenar_por_id(processos, total, "ordenado_por_id.csv");
+    int opcao;
 
-    printf("\n Ordenando por data_ajuizamento de forma decrescente\n");
-    ordenar_por_data(processos, total, "ordenado_por_data.csv");
+    do {
+        printf("\n--- MENU ---\n");
+        printf("1. Quantidade de processos por id_classe\n");
+        printf("2. Quantidade total de id_assuntos únicos\n");
+        printf("3. Listar processos com mais de um assunto\n");
+        printf("4. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+        getchar(); // consumir \n
 
-    printf("\n Contagem por id_classe \n");
-    contar_por_classe(processos, total);
+        switch (opcao) {
+            case 1:
+                printf("\n--- Quantidade de processos por id_classe ---\n");
+                contar_por_classe(processos, total);
+                break;
 
-    printf("\n Total de id_assuntos distintos \n");
-    contar_id_assuntos_unicos(processos, total);
+            case 2:
+                printf("\n--- Quantidade total de id_assuntos únicos ---\n");
+                contar_id_assuntos_unicos(processos, total);
+                break;
 
-    printf("\n Processos com mais de um assunto \n");
-    listar_processos_multiplos_assuntos(processos, total);
+            case 3:
+                printf("\n--- Processos com mais de um assunto ---\n");
+                listar_processos_multiplos_assuntos(processos, total);
+                break;
 
-    printf("\n Dias em tramitação \n");
-    dias_em_tramitacao(processos, total);
+            case 4:
+                printf("Saindo...\n");
+                break;
+
+            default:
+                printf("Opcao invalida. Tente novamente.\n");
+        }
+
+    } while (opcao != 4);
 
     return 0;
 }
-
-//gcc main.c processo.c -o programa.exe
-//.\programa.exe
-
-//.\output\main.exe
-
