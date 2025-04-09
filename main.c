@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "processo.h"
+#include "processo.c"
 
 int main() {
     const char *nome_arquivo = "processo_043_202409032338.csv";
@@ -52,12 +52,13 @@ int main() {
             case 6:
                 dias_em_tramitacao(processos, total);
                 break;
-            case 0:
+            case 7:
+                printf("Saindo...");
                 break;
             default:
                 printf("Opção inválida.\n");
         }
-    } while (opcao != 0);
+    } while (opcao != 7);
 
     liberar_assuntos(processos, total);
     free(processos);
