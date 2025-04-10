@@ -6,7 +6,7 @@ int main() {
     const char *nome_arquivo = "processo_043_202409032338.csv";
     int total = contar_linhas(nome_arquivo) - 1;
     if (total <= 0) {
-        printf(" Arquivo vazio ou Erro ao contar linhas.\n");
+        printf(" Arquivo vazio ou erro.\n");
         return 1;
     }
 
@@ -29,7 +29,7 @@ int main() {
         printf("7. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
-        getchar(); // consumir '\n'
+        getchar(); //pro \n
 
         switch (opcao) {
             case 1:
