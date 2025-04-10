@@ -168,7 +168,7 @@ void contar_id_assuntos_unicos(Processo *p, int n) {
             }
         }
     }
-    printf("Total de id_assuntos únicos: %d\n", total);
+    printf("Total de id_assuntos unicos: %d\n", total);
     for (int i = 0; i < total; i++) free(unicos[i]);
     free(unicos);
 }
