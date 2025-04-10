@@ -6,13 +6,13 @@ int main() {
     const char *nome_arquivo = "processo_043_202409032338.csv";
     int total = contar_linhas(nome_arquivo) - 1;
     if (total <= 0) {
-        printf("Erro ao contar linhas ou arquivo vazio.\n");
+        printf(" Arquivo vazio ou Erro ao contar linhas.\n");
         return 1;
     }
 
     Processo *processos = malloc(sizeof(Processo) * total);
     if (!carregar_processos(nome_arquivo, processos, total)) {
-        printf("Erro ao carregar dados.\n");
+        printf("Erro ao carregar os dados.\n");
         free(processos);
         return 1;
     }
@@ -53,10 +53,10 @@ int main() {
                 dias_em_tramitacao(processos, total);
                 break;
             case 7:
-                printf("Saindo...");
+                printf("Saindo do programa");
                 break;
             default:
-                printf("Opção inválida.\n");
+                printf("Opcao invalida.\n");
         }
     } while (opcao != 7);
 
