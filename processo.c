@@ -177,12 +177,12 @@ void listar_processos_multiplos_assuntos(Processo *p, int n) {
     printf("Processos com mais de um assunto:\n");
     for (int i = 0; i < n; i++) {
         if (p[i].total_assuntos >= 1) {
-            printf("ID: %s | Número: %s | Data: %s | Classe: %s | Assuntos: {", 
+            printf("ID: %s | Numero: %s | Data: %s | Classe: %s | Assuntos: {", 
                 p[i].id, p[i].numero, p[i].data_ajuizamento_str, p[i].id_classe);
             for (int j = 0; j < p[i].total_assuntos; j++) {
                 printf("%s%s", p[i].id_assunto[j], j < p[i].total_assuntos - 1 ? ", " : "");
             }
-            printf("} | Ano eleição: %d\n", p[i].ano_eleicao);
+            printf("} | Ano eleicao: %d\n", p[i].ano_eleicao);
         }
     }
 }
@@ -195,9 +195,9 @@ void dias_em_tramitacao(Processo *p, int n) {
         if (strcmp(p[i].id, id_busca) == 0) {
             time_t agora = time(NULL);
             double dias = difftime(agora, mktime(&p[i].data_ajuizamento)) / (60 * 60 * 24);
-            printf("Dias em tramitação: %.0f\n", dias);
+            printf("Dias em tramitacao: %.0f\n", dias);
             return;
         }
     }
-    printf("Processo não encontrado.\n");
+    printf("Processo nao encontrado.\n");
 }
